@@ -49,7 +49,7 @@ namespace GeneticAlgorithm
         static void Main(string[] args)
         {
             Console.WriteLine("遗传算法");
-            Console.WriteLine("下面举例来说明遗传算法用以求函数最大值函数为y = -x*x+1024的最大值，-32<=x<=31");
+            Console.WriteLine("下面举例来说如何应用遗传算法求函数y = -x*x+1024的最大值，-32<=x<=31");
             // f(x)=-x*x+1024
             // 迭代次数
             int totalTime = 5;
@@ -172,7 +172,7 @@ namespace GeneticAlgorithm
             chromosomes[0].probability = chromosomes[0].fitValuePercent;
             for (int i = 1; i < chromosomes.Count; i++)
             {
-                //上一个的累计概率加上自己的概率,得到自己的累计概率
+                //上一个的累积概率加上自己的概率,得到自己的累积概率
                 chromosomes[i].probability = chromosomes[i - 1].probability + chromosomes[i].fitValuePercent;
             }
         }
@@ -228,11 +228,11 @@ namespace GeneticAlgorithm
                 Console.WriteLine("fitValuePercent " + i + " " + chromosomes[i].fitValuePercent);
             }
             //计算累积概率
-            // 第一个的累计概率就是自己的概率
+            // 第一个的累积概率就是自己的概率
             chromosomes[0].probability = chromosomes[0].fitValuePercent;
             for (int i = 1; i < chromosomes.Count; i++)
             {
-                // 上一个的累计概率加上自己的概率,得到自己的累计概率
+                // 上一个的累积概率加上自己的概率,得到自己的累积概率
                 chromosomes[i].probability = chromosomes[i - 1].probability + chromosomes[i].fitValuePercent;
 
             }
@@ -285,17 +285,17 @@ namespace GeneticAlgorithm
         /// </summary>
         static void CrossOperate()
         {
-            /**         bit[5]~bit[0]   fit
-             * 4        000 110         12
-             * 3        001 010         9
-             * child1   000 010         14
-             * child2   001 110         5
+            /**         bit[5]~bit[0]   fit     
+             * 4        000 110         12      //第一条
+             * 3        001 010         9       //第二条
+             * child1   000 010         14      //第三条
+             * child2   001 110         5       //第四条
              */
             int rand = new Random(GetSeed()).Next(0, 6);  //0-5;
             Console.WriteLine("交叉的rand " + rand);
             for (int i = 0; i < rand; i++)
             {
-                //将第0个给第2个;
+                //将第一条（下标0）给第三条（下标2）
                 chromosomes[2].bits[i] = chromosomes[0].bits[i];  //第一条和第三条交叉
                 chromosomes[3].bits[i] = chromosomes[1].bits[i];  //第二条和第四条交叉
             }
