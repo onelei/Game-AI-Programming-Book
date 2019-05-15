@@ -7,7 +7,7 @@ using System.Collections.Generic;
 
 namespace GeneticAlgorithm
 {
-    internal class Program
+    class Program
     {
         /// <summary>
         /// 染色体;
@@ -34,6 +34,10 @@ namespace GeneticAlgorithm
             /// </summary>
             public double probability;
 
+            /// <summary>
+            /// 克隆
+            /// </summary>
+            /// <returns></returns>
             public chromosome Clone()
             {
                 chromosome c = new chromosome();
@@ -60,7 +64,7 @@ namespace GeneticAlgorithm
         private enum ChooseType
         {
             Bubble,//冒泡;
-            Roulette,//轮盘赌;
+            Roulette,//轮盘选择;
         }
 
         private static ChooseType chooseType = ChooseType.Roulette;
@@ -72,10 +76,10 @@ namespace GeneticAlgorithm
         private static void Main(string[] args)
         {
             Console.WriteLine("遗传算法");
-            Console.WriteLine("下面举例来说明遗传算法用以求函数最大值函数为y = -x*x+ 5的最大值，-32<=x<=31");
-            // f(x)=-x2+ 5
+            Console.WriteLine("下面举例来说明遗传算法用以求函数最大值函数为y = -x*x+ 1024的最大值，-32<=x<=31");
+            // f(x)=-x*x+ 1024
             // 迭代次数;
-            int totalTime = 200;
+            int totalTime = 5;
             Console.WriteLine("迭代次数为: " + totalTime);
             //初始化;
             Console.WriteLine("初始化: ");
@@ -101,8 +105,8 @@ namespace GeneticAlgorithm
                         break;
 
                     default:
-                        //轮盘赌;
-                        Console.WriteLine("轮盘赌:");
+                        //轮盘选择;
+                        Console.WriteLine("轮盘选择:");
                         UpdateNext();
                         break;
                 }
@@ -220,13 +224,13 @@ namespace GeneticAlgorithm
         /// <returns></returns>
         private static int GetFitValue(int x)
         {
-            //目标函数：y= - ( x^ 2 ) +5;
-            return (x * x) + 5;
+            //目标函数：y= - ( x^ 2 ) +1024;
+            return -(x * x) + 1024;
         }
 
         /// <summary>
         /// 更新下一代;
-        /// 基于轮盘赌选择方法，进行基因型的选择;
+        /// 基于轮盘选择选择方法，进行基因型的选择;
         /// </summary>
         private static void UpdateNext()
         {
@@ -275,7 +279,7 @@ namespace GeneticAlgorithm
                 Console.WriteLine("probability " + i + " " + chromosomes[i].probability);
             }
             chromosomesChild.Clear();
-            //轮盘赌选择方法,用于选出前两个;
+            //轮盘选择选择方法,用于选出前两个;
             for (int i = 0; i < chromosomes.Count; i++)
             {
                 //产生0-1之前的随机数;
@@ -317,7 +321,7 @@ namespace GeneticAlgorithm
         /// </summary>
         private static void CrossOperate()
         {
-            /**         bit[5]~bit[0]   fit
+            /**         bit[0]~bit[5]   fit
              * 4        000 110         12
              * 3        001 010         9
              * child1   000 010         14
@@ -353,10 +357,9 @@ namespace GeneticAlgorithm
         {
             int rand = random.Next(0, 50);
             Console.WriteLine("变异的rand " + rand);
-            if (rand < 5)//1/50 = 0.02的概率进行变异;rand==25;
+            if (rand < 5)//5/50 = 0.1的概率进行变异;rand<5;
             {
                 Console.WriteLine("开始变异");
-
                 int col = random.Next(0, 6);
                 int row = random.Next(0, 4);
                 Console.WriteLine("变异的位置 " + row + "  " + col);
