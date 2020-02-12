@@ -1,7 +1,7 @@
 # Game-AI-Programming-Book
 Game-AI-Programming-Book
 
-## ![勘误](./Docs勘误.md)
+## ![勘误](./Docs/勘误.md)
 
 ## QQ群：754814245     
 
