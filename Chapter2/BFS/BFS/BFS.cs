@@ -39,19 +39,8 @@ namespace BFS
         {
             passNodeList.Clear(); 
  
-            for (int i = 1; i < mapLengh; i++)
-            {
-                for (int j = 0; j < mapWidth; j++)
-                {
-                    //如果没有访问该节点，就访问它；
-                    if (!map[i,j].bVisit)
-                    {
-                        BFSSearch(map[i,j],origin,target,ref passNodeList); 
-                    }
-                }
-            } 
-            
-            
+            BFSSearch(origin, origin, target, ref passNodeList);
+
             // 这里是保存最短路径；
             Node curentNode = map[target.X, target.Y]; 
             while (curentNode.Value!=origin.Value)

@@ -104,6 +104,7 @@ namespace BFS
             PrintMapData();
             getMapStrings();
 
+            Console.ReadLine();
         }
         
         private static void getPoint(int value,out int x,out int y)
